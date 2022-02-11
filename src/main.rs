@@ -7,7 +7,7 @@ extern crate babel;
 extern crate clap;
 
 use babel::{read, search, Address};
-use clap::{App, Arg, SubCommand};
+use clap::{App, Arg};
 use std::process;
 
 macro_rules! parse_address {
@@ -34,26 +34,26 @@ fn main() {
         .about("Home of every book ever")
         .author("Zagdrath <zagdrath@member.fsf.org>")
         .subcommand(
-            SubCommand::with_name("search")
+            App::new("search")
                 .about("Search the library for something")
                 .version(env!("CARGO_PKG_VERSION"))
                 .arg(
-                    Arg::with_name("query")
+                    Arg::new("query")
                         .required(true)
                         .help("The search query")
                         .use_delimiter(false),
                 )
                 .arg(
-                    Arg::with_name("noisy")
+                    Arg::new("noisy")
                         .long("noisy")
                         .help("Allows pages with random characters around the query"),
                 ),
         )
         .subcommand(
-            SubCommand::with_name("read")
+            App::new("read")
                 .about("Read a page from the library")
                 .version(env!("CARGO_PKG_VERSION"))
-                .arg(Arg::with_name("address").required(true).help(
+                .arg(Arg::new("address").required(true).help(
                     "The address of the page to read from (wall:shelf:volume:page:hex_address)",
                 )),
         )

@@ -8,6 +8,7 @@ extern crate rand;
 
 use num::cast::{FromPrimitive, ToPrimitive};
 use num::{BigInt, Integer, Signed, Zero};
+use rand::seq::SliceRandom;
 use rand::Rng;
 
 /// BABEL set of characters
@@ -32,24 +33,6 @@ pub const COLUMNS: usize = 80;
 
 /// Total PAGE_LENGTH
 pub const PAGE_LENGTH: usize = ROWS * COLUMNS;
-
-macro_rules! parse_address {
-    ($input:expr, $max:expr, $label:expr) => {
-        match $input.parse::<u32>() {
-            Ok(n) => {
-                if n >= $max {
-                    println!("Bad address: {} must be less than {}", $label, $max);
-                    process::exit(1);
-                }
-                n
-            }
-            Err(_) => {
-                println!("Bad address: Not a number.");
-                process::exit(1);
-            }
-        }
-    };
-}
 
 #[derive(Debug)]
 /// Struct containting the address to a page in a volume on a shelf in the wall in a hex room
@@ -191,13 +174,13 @@ pub fn pad_rand(value: &str) -> String {
     let before = rng.gen_range(0..PAGE_LENGTH - value.len());
 
     for _ in 0..before {
-        page.push(*rng.choose(&BABEL_SET).unwrap());
+        page.push(*BABEL_SET.choose(&mut rng).unwrap());
     }
 
     page.push_str(value);
 
     while page.len() < page.capacity() {
-        page.push(*rng.choose(&BABEL_SET).unwrap());
+        page.push(*BABEL_SET.choose(&mut rng).unwrap());
     }
 
     page

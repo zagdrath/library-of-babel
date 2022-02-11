@@ -8,11 +8,11 @@ edition = "2021"
 
 [lib]
 name = "babel"
-path = "/src/lib.rs"
+path = "src/lib.rs"
 
 [[bin]]
 name = "babel"
-path = "/src/main.rs"
+path = "src/main.rs"
 
 [dependencies]
 num = "0.4.0"
