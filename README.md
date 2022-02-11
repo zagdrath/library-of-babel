@@ -5,6 +5,7 @@ This repository contains the source code for [The Library of Babel](https://en.w
 
 ### Usage
 The pages in the library are identified by the wall, shelf, volume, page number(in Base10), and the room's hex address which is in Base64 seperated by colons. You are able to explore the library by either using the `search` or the `read` command.
+
 `Wall:Shelf:Volume:Page:Hex_Address`
 
 You can search for strings but you must remember to keep in mind that it must be in all lowercase a-z, have a comma, a period, or a space.
