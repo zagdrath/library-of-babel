@@ -14,7 +14,7 @@ macro_rules! parse_address {
     ($input:expr, $max:expr, $label:expr) => {
         match $input.parse::<u32>() {
             Ok(n) => {
-                if n >= $max {
+                if n >= $max+1 {
                     println!("Bad address: {} must be less than {}", $label, $max);
                     process::exit(1);
                 }
